@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time, Work & Salary Utility App</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle-container">
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+            <i class="fas fa-moon">🌙</i>
+            <i class="fas fa-sun">☀️</i>
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="app-title">
+                <i class="fas fa-clock"></i>
+                Utility-App
+            </h1>
+            <p class="app-subtitle">Time, Work & Salary Tools in One Place</p>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="navbar" id="navbar">
+            <div class="nav-container">
+                <button class="nav-btn active" data-section="time-tools">
+                    <i class="fas fa-clock"></i>
+                    <span>Time Tools</span>
+                </button>
+                <button class="nav-btn" data-section="notepad">
+                    <i class="fas fa-sticky-note"></i>
+                    <span>Smart Notepad</span>
+                </button>
+                <button class="nav-btn" data-section="work-file">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Daily Work File</span>
+                </button>
+                <button class="nav-btn" data-section="salary">
+                    <i class="fas fa-money-check-alt"></i>
+                    <span>Salary Module</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Time Tools Section -->
+            <section id="time-tools" class="section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-clock"></i> Time Tools</h2>
+                    <p>Calculate age, time differences, and convert units</p>
+                </div>
+
+                <div class="tools-grid">
+                    <!-- Age Calculator -->
+                    <div class="glass-card tool-card">
+                        <h3><i class="fas fa-birthday-cake"></i> Age Calculator</h3>
+                        <div class="input-group">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" id="dob" class="glass-input" max="">
+                            <div class="error-message" id="dob-error"></div>
+                        </div>
+                        <button id="calculateAge" class="primary-btn">Calculate Age</button>
+                        
+                        <div class="results-container" id="age-results">
+                            <h4>Your Age:</h4>
+                            <div class="age-results-grid">
+                                <div class="result-box">
+                                    <span class="result-value" id="years">0</span>
+                                    <span class="result-label">Years</span>
+                                </div>
+                                <div class="result-box">
+                                    <span class="result-value" id="months">0</span>
+                                    <span class="result-label">Months</span>
+                                </div>
+                                <div class="result-box">
+                                    <span class="result-value" id="days">0</span>
+                                    <span class="result-label">Days</span>
+                                </div>
+                            </div>
+                            <div class="total-days">
+                                Total Days Lived: <span id="total-days">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Time Difference Calculator -->
+                    <div class="glass-card tool-card">
+                        <h3><i class="fas fa-hourglass-half"></i> Time Difference</h3>
+                        <div class="input-group">
+                            <label for="start-datetime">Start Date & Time</label>
+                            <input type="datetime-local" id="start-datetime" class="glass-input">
+                        </div>
+                        <div class="input-group">
+                            <label for="end-datetime">End Date & Time</label>
+                            <input type="datetime-local" id="end-datetime" class="glass-input">
+                        </div>
+                        <button id="calculateDifference" class="primary-btn">Calculate Difference</button>
+                        
+                        <div class="results-container" id="difference-results">
+                            <h4>Time Difference:</h4>
+                            <div class="time-results-grid">
+                                <div class="result-box">
+                                    <span class="result-value" id="diff-days">0</span>
+                                    <span class="result-label">Days</span>
+                                </div>
+                                <div class="result-box">
+                                    <span class="result-value" id="diff-hours">0</span>
+                                    <span class="result-label">Hours</span>
+                                </div>
+                                <div class="result-box">
+                                    <span class="result-value" id="diff-minutes">0</span>
+                                    <span class="result-label">Minutes</span>
+                                </div>
+                                <div class="result-box">
+                                    <span class="result-value" id="diff-seconds">0</span>
+                                    <span class="result-label">Seconds</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Unit Converter -->
+                    <div class="glass-card tool-card">
+                        <h3><i class="fas fa-exchange-alt"></i> Unit Converter</h3>
+                        <div class="input-group">
+                            <label for="conversion-type">Conversion Type</label>
+                            <select id="conversion-type" class="glass-input">
+                                <option value="length">Length (m, km, cm)</option>
+                                <option value="weight">Weight (kg, g)</option>
+                                <option value="time">Time (sec, min, hr)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="converter-inputs">
+                            <div class="input-group">
+                                <input type="number" id="from-value" class="glass-input" placeholder="Value" step="any">
+                                <select id="from-unit" class="glass-input"></select>
+                            </div>
+                            <div class="converter-arrow">
+                                <i class="fas fa-long-arrow-alt-down"></i>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="to-value" class="glass-input" placeholder="Result" readonly>
+                                <select id="to-unit" class="glass-input"></select>
+                            </div>
+                        </div>
+                        
+                        <button id="convertUnits" class="primary-btn">Convert</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Smart Notepad Section -->
+            <section id="notepad" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-sticky-note"></i> Smart Notepad</h2>
+                    <p>Create, edit, and manage your notes</p>
+                </div>
+
+                <div class="notepad-container">
+                    <div class="glass-card notepad-editor">
+                        <h3>Create New Note</h3>
+                        <div class="input-group">
+                            <label for="note-title">Title</label>
+                            <input type="text" id="note-title" class="glass-input" placeholder="Enter note title">
+                        </div>
+                        <div class="input-group">
+                            <label for="note-content">Content</label>
+                            <textarea id="note-content" class="glass-input textarea" rows="5" placeholder="Enter your note content here..."></textarea>
+                        </div>
+                        <div class="note-actions">
+                            <button id="saveNote" class="primary-btn">
+                                <i class="fas fa-save"></i> Save Note
+                            </button>
+                            <button id="clearNote" class="secondary-btn">
+                                <i class="fas fa-eraser"></i> Clear
+                            </button>
+                        </div>
+                        <input type="hidden" id="note-id">
+                    </div>
+
+                    <div class="notepad-sidebar">
+                        <div class="glass-card search-container">
+                            <div class="input-group">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="note-search" class="glass-input" placeholder="Search notes...">
+                            </div>
+                        </div>
+
+                        <div class="notes-container" id="notes-list">
+                            <!-- Notes will be dynamically added here -->
+                            <div class="empty-notes">
+                                <i class="fas fa-sticky-note"></i>
+                                <p>No notes yet. Create your first note!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Daily Work File Section -->
+            <section id="work-file" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-briefcase"></i> Daily Work File</h2>
+                    <p>Track and manage your daily work logs</p>
+                </div>
+
+                <div class="workfile-container">
+                    <div class="glass-card workfile-form">
+                        <h3>Add Work Log</h3>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="work-date">Date</label>
+                                <input type="date" id="work-date" class="glass-input">
+                            </div>
+                            <div class="input-group">
+                                <label for="work-hours">Working Hours</label>
+                                <input type="number" id="work-hours" class="glass-input" placeholder="e.g., 8" min="0" step="0.5">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="work-title">Work Title</label>
+                            <input type="text" id="work-title" class="glass-input" placeholder="Enter work title">
+                        </div>
+                        <div class="input-group">
+                            <label for="work-description">Description</label>
+                            <textarea id="work-description" class="glass-input textarea" rows="4" placeholder="Describe your work..."></textarea>
+                        </div>
+                        <div class="work-actions">
+                            <button id="saveWork" class="primary-btn">
+                                <i class="fas fa-save"></i> Save Entry
+                            </button>
+                            <button id="clearWork" class="secondary-btn">
+                                <i class="fas fa-eraser"></i> Clear
+                            </button>
+                        </div>
+                        <input type="hidden" id="work-id">
+                    </div>
+
+                    <div class="workfile-content">
+                        <div class="glass-card filter-container">
+                            <div class="input-row">
+                                <div class="input-group">
+                                    <label for="filter-date">Filter by Date</label>
+                                    <input type="date" id="filter-date" class="glass-input">
+                                </div>
+                                <button id="clearFilter" class="secondary-btn">Clear Filter</button>
+                            </div>
+                        </div>
+
+                        <div class="worklog-table-container">
+                            <table class="worklog-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Title</th>
+                                        <th>Hours</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="worklog-entries">
+                                    <!-- Work logs will be dynamically added here -->
+                                    <tr class="empty-row">
+                                        <td colspan="4">No work logs yet. Add your first entry!</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Salary Module Section -->
+            <section id="salary" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-money-check-alt"></i> Salary Module</h2>
+                    <p>Calculate and manage salary records</p>
+                </div>
+
+                <div class="salary-container">
+                    <div class="glass-card salary-calculator">
+                        <h3>Salary Calculator</h3>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="employee-name">Employee Name</label>
+                                <input type="text" id="employee-name" class="glass-input" placeholder="Enter name">
+                            </div>
+                            <div class="input-group">
+                                <label for="basic-salary">Basic Salary ($)</label>
+                                <input type="number" id="basic-salary" class="glass-input" placeholder="0.00" min="0" step="0.01">
+                            </div>
+                        </div>
+                        
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="working-days">Working Days</label>
+                                <input type="number" id="working-days" class="glass-input" placeholder="e.g., 22" min="0" max="31">
+                            </div>
+                            <div class="input-group">
+                                <label for="overtime-hours">Overtime Hours</label>
+                                <input type="number" id="overtime-hours" class="glass-input" placeholder="0" min="0" step="0.5">
+                            </div>
+                        </div>
+                        
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="overtime-rate">Overtime Rate ($/hr)</label>
+                                <input type="number" id="overtime-rate" class="glass-input" placeholder="0.00" min="0" step="0.01">
+                            </div>
+                            <div class="input-group">
+                                <label for="bonus">Bonus ($)</label>
+                                <input type="number" id="bonus" class="glass-input" placeholder="0.00" min="0" step="0.01">
+                            </div>
+                        </div>
+                        
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="deduction">Deduction ($)</label>
+                                <input type="number" id="deduction" class="glass-input" placeholder="0.00" min="0" step="0.01">
+                            </div>
+                            <div class="input-group">
+                                <label for="salary-date">Salary Date</label>
+                                <input type="date" id="salary-date" class="glass-input">
+                            </div>
+                        </div>
+                        
+                        <div class="salary-actions">
+                            <button id="calculateSalary" class="primary-btn">
+                                <i class="fas fa-calculator"></i> Calculate Salary
+                            </button>
+                            <button id="saveSalary" class="secondary-btn">
+                                <i class="fas fa-save"></i> Save Record
+                            </button>
+                            <button id="clearSalary" class="secondary-btn">
+                                <i class="fas fa-eraser"></i> Clear
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="salary-results-sidebar">
+                        <div class="glass-card salary-breakdown">
+                            <h3>Salary Breakdown</h3>
+                            <div class="breakdown-item">
+                                <span>Basic Salary</span>
+                                <span id="breakdown-basic">$0.00</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span>Overtime Pay</span>
+                                <span id="breakdown-overtime">$0.00</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span>Bonus</span>
+                                <span id="breakdown-bonus">$0.00</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span>Deduction</span>
+                                <span id="breakdown-deduction">$0.00</span>
+                            </div>
+                            <div class="breakdown-item total">
+                                <span>Gross Salary</span>
+                                <span id="breakdown-gross">$0.00</span>
+                            </div>
+                            <div class="breakdown-item net">
+                                <span>Net Salary</span>
+                                <span id="breakdown-net">$0.00</span>
+                    </div>
+                        </div>
+
+                        <div class="salary-history">
+                            <h3>Salary History</h3>
+                            <div class="history-container" id="salary-history">
+                                <!-- Salary records will be dynamically added here -->
+                                <div class="empty-history">
+                                    <i class="fas fa-history"></i>
+                                    <p>No salary records yet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>Build by – Suman Basnet</p>
+                <p class="footer-note">All-in-One Time, Work & Salary Utility Web App</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content glass-card">
+            <h3 id="modal-title">Confirm Action</h3>
+            <p id="modal-message">Are you sure you want to proceed?</p>
+            <div class="modal-actions">
+                <button id="modal-confirm" class="primary-btn">Yes, Continue</button>
+                <button id="modal-cancel" class="secondary-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/script.js"></script>
+</body>
+</html>
